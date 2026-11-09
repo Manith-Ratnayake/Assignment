@@ -1,5 +1,3 @@
 from sklearn.tree import DecisionTreeRegressor
 
-MODELS = {
-    "Decision Tree": DecisionTreeRegressor
-}
+MODELS = {"decision_tree": DecisionTreeRegressor}

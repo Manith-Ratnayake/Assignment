@@ -1,8 +1,8 @@
-from sklearn.linear_model import LinearRegression, Ridge, Lasso, ElasticNet
+from sklearn.linear_model import ElasticNet, Lasso, LinearRegression, Ridge
 
 MODELS = {
-    "Linear Regression": LinearRegression,
-    "Ridge": Ridge,
-    "Lasso": Lasso,
-    "ElasticNet": ElasticNet
+    "linear": LinearRegression,
+    "ridge": Ridge,
+    "lasso": Lasso,
+    "elasticnet": ElasticNet,
 }
