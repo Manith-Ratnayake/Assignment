@@ -7,6 +7,7 @@ class GRUModel(nn.Module):
         self.gru = nn.GRU(input_size, hidden_size, num_layers, batch_first=True)
         self.fc = nn.Linear(hidden_size, 1)
 
+
     def forward(self, x):
         output, _ = self.gru(x)
         prediction = self.fc(output[:, -1, :])

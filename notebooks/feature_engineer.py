@@ -173,8 +173,27 @@ def save_data(sequences, feature_scaler, target_scaler, config):
     print("Dataset and scalers saved successfully.")
 
 
+def clip_outliers(df, config):
+    target = config["target"]
+    train_end = int(len(df) * config["train_ratio"])
+
+    q1 = df[target].iloc[:train_end].quantile(0.25)
+    q3 = df[target].iloc[:train_end].quantile(0.75)
+    iqr = q3 - q1
+
+    lower = max(0, q1 - 1.5 * iqr)
+    upper = q3 + 1.5 * iqr
+
+    df = df.copy()
+    df[target] = df[target].clip(lower=lower, upper=upper)
+
+    # print(f"IQR clipping: Lower={lower:.2f}, Upper={upper:.2f}")
+    return df
+
+
 def main(config):
     df = load_data(config)
+    df = clip_outliers(df, config)
     df = prepare_features(df, config)
     splits = split_data(df, config)
     scaled, feature_scaler, target_scaler = scale_data(splits, config)
