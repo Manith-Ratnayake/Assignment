@@ -1,0 +1,10 @@
+{
+  "experiment_name": "catboost_base",
+  "notes": "baseline",
+  "data_dir": "data",
+  "output_dir": "training_runs",
+  "seed": 42,
+  "evaluate_test": false,
+  "model_name": "catboost",
+  "model_params": {}
+}
