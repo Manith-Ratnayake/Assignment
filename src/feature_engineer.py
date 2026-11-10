@@ -1,8 +1,9 @@
-from preprocessing.data_io import load_data, save_feature_config, save_scalers, save_splits
+from preprocessing.data_io import load_data, save_feature_config, save_feature_selection, save_scalers, save_splits
 from preprocessing.cleaning import clip_outliers, compute_iqr_bounds
 from preprocessing.features import check_no_missing, create_features, drop_warmup_rows
 from preprocessing.splitting import split_data
 from preprocessing.scaling import apply_scalers, fit_scalers
+from preprocessing.selection import compare_feature_counts, keep_columns, rank_features, top_features
 
 
 def main(config):
@@ -32,11 +33,26 @@ def main(config):
         splits["train"], target, config["feature_scaler"], config.get("target_scaler", "standard")
     )
     scaled = apply_scalers(splits, target, feature_scaler, target_scaler)
+    columns = list(df.columns.drop(target))
 
-    # 5. Save the scaled table, the scalers and a record of the feature settings.
+    # 5. Feature selection with RFE: rank on the training rows, keep the top n_selected_features
+    n_selected = config.get("n_selected_features", 0)
+    if n_selected:
+        X_train, y_train = scaled["train"]
+        ranking = rank_features(X_train, y_train, columns)
+        comparison = compare_feature_counts(scaled, columns, ranking, target_scaler)
+        save_feature_selection(ranking, comparison, config["output_dir"])
+        print(comparison.to_string(index=False))
+
+        selected = top_features(columns, ranking, n_selected)
+        scaled = keep_columns(scaled, columns, selected)
+        columns = selected
+        print(f"RFE kept {len(columns)} features")
+
+    # 6. Save the scaled table, the scalers and a record of the feature settings.
     #    Windows for the sequence models are cut later, during deep learning training.
     save_splits(scaled, config["output_dir"])
     save_scalers(feature_scaler, target_scaler, config["output_dir"])
-    save_feature_config(config, df.columns.drop(target), config["output_dir"])
+    save_feature_config(config, columns, config["output_dir"])
 
     print("Finished the data preprocessing step")

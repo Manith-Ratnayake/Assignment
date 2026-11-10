@@ -7,8 +7,6 @@ def create_features(df, config):
     y = df[target]
 
     features = shift_sensors(df, target)
-    features["past_target"] = y.shift(1)
-
     features = add_lag_features(features, y, config["lags"])
     features = add_rolling_features(features, y, config["rolling"])
     features = add_diff_features(features, y, config["diffs"])

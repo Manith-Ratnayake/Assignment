@@ -39,6 +39,15 @@ def save_scalers(feature_scaler, target_scaler, output_dir):
     joblib.dump(target_scaler, output_dir / "target_scaler.pkl")
 
 
+def save_feature_selection(ranking, comparison, output_dir):
+    """Save the RFE ranking and the feature-count comparison as CSV files for the report."""
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    ranking.to_csv(output_dir / "feature_ranking.csv", index_label="feature")
+    comparison.to_csv(output_dir / "feature_count_comparison.csv", index=False)
+
+
 def save_feature_config(config, feature_columns, output_dir):
     """Save the feature settings and final column names next to processed.npz.
 
