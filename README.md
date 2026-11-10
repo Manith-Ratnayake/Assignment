@@ -115,7 +115,7 @@ All settings are in the `FeatureConfig` dataclass. The pipeline (`src/feature_en
    | Time | `hour_sin`, `hour_cos`, `day_sin`, `day_cos` (time as a circle), `is_weekend` |
    | Domain | `is_holiday` (Belgian public holidays in 2016) |
    | Interactions | temperature × humidity for the kitchen, living room and outside (`T1_x_RH_1`, `T2_x_RH_2`, `T6_x_RH_6`) |
-   | Sensor summaries | average and spread of the 8 indoor temperature and humidity sensors, indoor–outdoor temperature gap |
+   | Sensor summaries | average and spread of all 9 temperature and humidity sensors (T1–T9, RH_1–RH_9), indoor–outdoor temperature gap |
 
    The random columns `rv1` and `rv2` are dropped.
 4. **Drop the first 145 rows**, which don't have enough history for the 24-hour features.
