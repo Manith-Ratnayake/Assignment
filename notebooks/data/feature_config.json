@@ -43,19 +43,20 @@
     144
   ],
   "time_features": [
-    "hour",
-    "day_of_week"
+    "is_weekend"
   ],
   "cyclical_time": true,
   "interactions": [],
   "sensor_aggregates": false,
-  "drop_columns": [],
+  "drop_columns": [
+    "rv1",
+    "rv2"
+  ],
   "feature_scaler": "standard",
-  "sequence_length": 72,
   "fixed_warmup": 145,
-  "train_ratio": 0.68,
-  "val_ratio": 0.12,
-  "n_features": 62,
+  "train_ratio": 0.7,
+  "val_ratio": 0.15,
+  "n_features": 59,
   "feature_columns": [
     "lights",
     "T1",
@@ -82,8 +83,6 @@
     "Windspeed",
     "Visibility",
     "Tdewpoint",
-    "rv1",
-    "rv2",
     "past_target",
     "lag_1",
     "lag_2",
@@ -113,8 +112,7 @@
     "diff_18",
     "diff_36",
     "diff_144",
-    "hour",
-    "day_of_week",
+    "is_weekend",
     "hour_sin",
     "hour_cos",
     "day_sin",
