@@ -1,11 +1,14 @@
 import time
-
+from dataclasses import replace
 import joblib
 
 from training.data import load_processed_data
 from training.metrics import evaluate_splits
 from training.ml_models import build_ml_model
 from training.results import append_result, build_result_row, make_run_dir, print_summary, save_run
+
+from dataclasses import replace
+from training.grid import grid_combinations
 
 
 def run_ml(config):
@@ -31,3 +34,14 @@ def run_ml(config):
 
     print_summary(metrics, run_dir)
     return metrics
+
+
+def run_ml_grid(grid_path, base_config):
+    """Run run_ml once for every combination in the grid file (e.g. ml.json).
+
+    Every setting in the file goes into model_params. Everything else comes from base_config.
+    """
+    for model_name, params, run_name in grid_combinations(grid_path):
+        config = replace(base_config, experiment_name=run_name, model_name=model_name,
+                         model_params=params, notes=base_config.notes or "grid search")
+        run_ml(config)

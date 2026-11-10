@@ -1,0 +1,12 @@
+{
+  "experiment_name": "grid_ridge_alpha1.0",
+  "notes": "grid search",
+  "data_dir": "data",
+  "output_dir": "../models/training_runs",
+  "seed": 42,
+  "evaluate_test": false,
+  "model_name": "ridge",
+  "model_params": {
+    "alpha": 1.0
+  }
+}

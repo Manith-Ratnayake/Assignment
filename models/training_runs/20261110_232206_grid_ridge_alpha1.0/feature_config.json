@@ -1,0 +1,107 @@
+{
+  "data_path": "data/eda.parquet",
+  "output_dir": "data",
+  "target": "Appliances",
+  "lags": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    18,
+    36,
+    144
+  ],
+  "rolling": {
+    "mean": [
+      3,
+      6,
+      18,
+      36,
+      144
+    ],
+    "std": [
+      3,
+      6,
+      18,
+      36,
+      144
+    ],
+    "min": [],
+    "max": []
+  },
+  "diffs": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    18,
+    36,
+    144
+  ],
+  "time_features": [
+    "is_weekend",
+    "is_holiday"
+  ],
+  "cyclical_time": true,
+  "interactions": [
+    [
+      "T1",
+      "RH_1"
+    ],
+    [
+      "T2",
+      "RH_2"
+    ],
+    [
+      "T6",
+      "RH_6"
+    ]
+  ],
+  "sensor_aggregates": true,
+  "drop_columns": [
+    "rv1",
+    "rv2"
+  ],
+  "n_selected_features": 30,
+  "feature_scaler": "standard",
+  "fixed_warmup": 145,
+  "train_ratio": 0.7,
+  "val_ratio": 0.15,
+  "n_features": 30,
+  "feature_columns": [
+    "lights",
+    "T1",
+    "RH_1",
+    "T4",
+    "RH_4",
+    "T5",
+    "RH_8",
+    "T9",
+    "T_out",
+    "lag_1",
+    "lag_2",
+    "lag_3",
+    "lag_4",
+    "lag_5",
+    "lag_6",
+    "lag_18",
+    "lag_144",
+    "rolling_mean_3",
+    "rolling_mean_6",
+    "rolling_mean_18",
+    "diff_1",
+    "diff_2",
+    "diff_3",
+    "diff_4",
+    "diff_5",
+    "hour_sin",
+    "hour_cos",
+    "temp_std",
+    "indoor_outdoor_temp_gap",
+    "T1_x_RH_1"
+  ]
+}

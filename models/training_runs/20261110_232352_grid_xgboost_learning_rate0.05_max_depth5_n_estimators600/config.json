@@ -1,0 +1,14 @@
+{
+  "experiment_name": "grid_xgboost_learning_rate0.05_max_depth5_n_estimators600",
+  "notes": "grid search",
+  "data_dir": "data",
+  "output_dir": "../models/training_runs",
+  "seed": 42,
+  "evaluate_test": false,
+  "model_name": "xgboost",
+  "model_params": {
+    "learning_rate": 0.05,
+    "max_depth": 5,
+    "n_estimators": 600
+  }
+}

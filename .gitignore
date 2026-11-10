@@ -1,3 +1,6 @@
 __pycache__/
 .ipynb_checkpoints/
 *.npz
+*.joblib
+catboost_info/
+models/old_runs/

@@ -1,4 +1,8 @@
 import numpy as np
+import pandas as pd
+
+# Belgian public holidays inside the data period (11 Jan - 27 May 2016)
+BELGIAN_HOLIDAYS_2016 = pd.to_datetime(["2016-03-28", "2016-05-01", "2016-05-05", "2016-05-16"])
 
 
 def create_features(df, config):
@@ -58,12 +62,13 @@ def add_diff_features(features, y, diffs):
 
 
 def add_time_features(features, index, names):
-    """Add the calendar features listed in `names` (hour, day_of_week, is_weekend, month)."""
+    """Add the calendar features listed in `names` (hour, day_of_week, is_weekend, is_holiday, month)."""
     day = index.dayofweek
     available = {
         "hour": index.hour,
         "day_of_week": day,
         "is_weekend": (day >= 5).astype(int),
+        "is_holiday": index.normalize().isin(BELGIAN_HOLIDAYS_2016).astype(int),
         "month": index.month,
     }
 

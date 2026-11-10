@@ -18,7 +18,7 @@ ML_MODELS = {
     "gradient_boosting": GradientBoostingRegressor,
     "xgboost": XGBRegressor,
     "lightgbm": partial(LGBMRegressor, verbose=-1),     # silence per-iteration logs
-    "catboost": partial(CatBoostRegressor, verbose=0),
+    "catboost": partial(CatBoostRegressor, verbose=0, allow_writing_files=False),
 }
 
 

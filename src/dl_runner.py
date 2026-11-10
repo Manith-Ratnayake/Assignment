@@ -1,13 +1,17 @@
 import time
+from dataclasses import replace
 
 import torch
 
 from training.data import load_processed_data
 from training.dl_models import build_dl_model
+from training.grid import grid_combinations
 from training.metrics import compute_metrics, evaluate_splits, to_wh
 from training.results import append_result, build_result_row, make_run_dir, print_summary, save_run
 from training.torch_loop import create_loss, fit, get_device, make_train_loader, predict, set_seed
 from training.windows import make_window_datasets
+
+MODEL_PARAMS = ["hidden_size", "num_layers", "dropout"]
 
 
 def run_dl(config):
@@ -58,3 +62,18 @@ def run_dl(config):
     print(f"Best epoch: {best_epoch}")
     print_summary(metrics, run_dir)
     return metrics
+
+
+def run_dl_grid(grid_path, base_config):
+    """Run run_dl once for every combination in the grid file (e.g. dl.json).
+
+    hidden_size, num_layers and dropout go into model_params; any other setting in the file
+    (learning_rate, sequence_length, ...) replaces the matching DLConfig field.
+    Everything not in the file comes from base_config (e.g. epochs, patience).
+    """
+    for model_name, params, run_name in grid_combinations(grid_path):
+        model_params = {key: value for key, value in params.items() if key in MODEL_PARAMS}
+        settings = {key: value for key, value in params.items() if key not in MODEL_PARAMS}
+        config = replace(base_config, experiment_name=run_name, model_name=model_name,
+                         model_params=model_params, notes=base_config.notes or "grid search", **settings)
+        run_dl(config)

@@ -1,0 +1,12 @@
+{
+  "experiment_name": "grid_decision_tree_max_depth6",
+  "notes": "grid search",
+  "data_dir": "data",
+  "output_dir": "../models/training_runs",
+  "seed": 42,
+  "evaluate_test": false,
+  "model_name": "decision_tree",
+  "model_params": {
+    "max_depth": 6
+  }
+}

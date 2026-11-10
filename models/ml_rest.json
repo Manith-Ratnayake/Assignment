@@ -1,0 +1,7 @@
+{
+  "lightgbm": {
+    "learning_rate": [0.05],
+    "n_estimators": [300, 600],
+    "num_leaves": [7, 15]
+  }
+}

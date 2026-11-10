@@ -1,0 +1,14 @@
+{
+  "experiment_name": "grid_catboost_depth4_iterations500_learning_rate0.05",
+  "notes": "grid search",
+  "data_dir": "data",
+  "output_dir": "../models/training_runs",
+  "seed": 42,
+  "evaluate_test": false,
+  "model_name": "catboost",
+  "model_params": {
+    "depth": 4,
+    "iterations": 500,
+    "learning_rate": 0.05
+  }
+}

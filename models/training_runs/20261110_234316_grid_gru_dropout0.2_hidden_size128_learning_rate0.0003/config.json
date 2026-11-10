@@ -1,0 +1,23 @@
+{
+  "experiment_name": "grid_gru_dropout0.2_hidden_size128_learning_rate0.0003",
+  "notes": "grid search",
+  "data_dir": "data",
+  "output_dir": "../models/training_runs",
+  "seed": 42,
+  "evaluate_test": false,
+  "model_name": "gru",
+  "model_params": {
+    "dropout": 0.2,
+    "hidden_size": 128
+  },
+  "sequence_length": 36,
+  "epochs": 20,
+  "batch_size": 128,
+  "learning_rate": 0.0003,
+  "weight_decay": 0.0001,
+  "loss": "mse",
+  "huber_delta": 1.0,
+  "patience": 5,
+  "monitor": "rmse",
+  "grad_clip": 1.0
+}

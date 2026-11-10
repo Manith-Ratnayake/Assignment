@@ -1,0 +1,23 @@
+{
+  "experiment_name": "grid_lstm_dropout0.0_hidden_size64_learning_rate0.001",
+  "notes": "grid search",
+  "data_dir": "data",
+  "output_dir": "../models/training_runs",
+  "seed": 42,
+  "evaluate_test": false,
+  "model_name": "lstm",
+  "model_params": {
+    "dropout": 0.0,
+    "hidden_size": 64
+  },
+  "sequence_length": 36,
+  "epochs": 20,
+  "batch_size": 128,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "loss": "mse",
+  "huber_delta": 1.0,
+  "patience": 5,
+  "monitor": "rmse",
+  "grad_clip": 1.0
+}
